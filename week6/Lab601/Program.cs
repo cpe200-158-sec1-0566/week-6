@@ -13,9 +13,13 @@ namespace Lab601
       ContinentFactory america = new AmericaFactory();
       world = new AnimalWorld(america);
       world.RunFoodChain();
- 
-      // Wait for user input
-      Console.ReadKey();
+
+      ContinentFactory asian = new AsianFactory();
+      world = new AnimalWorld(asian);
+      world.RunFoodChain();
+
+            // Wait for user input
+            Console.ReadKey();
     }
   }
  
@@ -47,8 +51,21 @@ namespace Lab601
       return new Wolf();
     }
   }
- 
-  abstract class Herbivore
+
+    //Asian animal
+    class AsianFactory : ContinentFactory
+    {
+        public override Herbivore CreateHerbivore()
+        {
+            return new Deer();
+        }
+        public override Carnivore CreateCarnivore()
+        {
+            return new Tiger();
+        }
+    }
+
+    abstract class Herbivore
   {
   }
  
@@ -84,6 +101,24 @@ namespace Lab601
         " eats " + h.GetType().Name);
     }
   }
+
+//Asian animal
+  class Deer : Herbivore
+   {
+
+   }
+
+  class Tiger : Carnivore
+    {
+        public override void Eat(Herbivore a)
+        {
+            // Eat deer
+            Console.WriteLine(this.GetType().Name +
+                " eats " + a.GetType().Name);
+        }
+
+    }
+
  
   class AnimalWorld
   {
